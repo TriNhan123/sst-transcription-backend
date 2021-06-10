@@ -36,9 +36,20 @@ provider:
         Resource: "arn:aws:dynamodb:us-east-1:*:*"
 
 functions:
+
   upload:
     handler: upload.main
     events:
       - http:
           path: upload
           method: post
+
+  get:
+    # Defines an HTTP API endpoint that calls the main function in get.js
+    # - path: url path is /audio/{id}
+    # - method: GET request
+    handler: get.main
+    events:
+      - http:
+          path: audio/{id}
+          method: get
