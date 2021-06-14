@@ -43,6 +43,7 @@ functions:
       - http:
           path: upload
           method: post
+          authorizer: aws_iam
 
   get:
     # Defines an HTTP API endpoint that calls the main function in get.js
@@ -53,6 +54,7 @@ functions:
       - http:
           path: audio/{id}
           method: get
+          authorizer: aws_iam
   
   list:
     # Defines an HTTP API endpoint that calls the main function in list.js
@@ -63,3 +65,4 @@ functions:
       - http:
           path: audio
           method: get        
+          authorizer: aws_iam
