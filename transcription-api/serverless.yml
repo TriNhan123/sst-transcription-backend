@@ -15,11 +15,7 @@ provider:
   runtime: nodejs10.x
   stage: prod
   region: us-east-1
-
-# These environment variables are made available to our functions
-# under process.env.
-  environment:
-    tableName: serverless-transcribe
+  tableName: serverless-transcribe
 
 # 'iamRoleStatements' defines the permission policy for the Lambda function.
 # In this case Lambda functions are granted with permissions to access DynamoDB.
@@ -69,6 +65,18 @@ functions:
           method: get        
           cors: true
           authorizer: aws_iam
+  
+  update:
+    # Defines an HTTP API endpoint that calls the main function in update.js
+    # - path: url path is /notes/{id}
+    # - method: PUT request
+    handler: update.main
+    events:
+      - http:
+          path: audio/{id}
+          method: put   
+          cors: true
+          authorizer: aws_iam    
 
 # Create our resources with separate CloudFormation templates
 resources:
